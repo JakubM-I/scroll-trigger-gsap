@@ -1,0 +1,91 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+:root{
+    --desc-block-padding: 20px;
+}
+
+.page-container {
+    width: min(1400px, 100%);
+    padding-inline: 15px;
+    margin-inline: auto;
+}
+
+.page-section {
+    min-height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-section.first{
+    background-color: #f2f258;
+}
+
+.page-section.second{
+    background-color: #58f2a6;
+}
+
+.page-section.last{
+    background-color: #a658f2;
+}
+
+.animated-div {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.title-list{
+    width: 450px;
+    height: 300px;
+    background-color: #f25858;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title-list-item{
+    font-size: 25px;
+    font-weight: 600;
+    color: #f5d6d6;
+    margin-block-end: 10px;
+    opacity: 0.5;
+}
+
+.title-list-item.active{
+    opacity: 1;
+}
+
+.desc-list{
+    width: 550px;
+    height: 180px;
+    background-color: #58a6f2;
+    border-radius: 10px;
+    padding: var(--desc-block-padding);
+    overflow: hidden;
+}
+
+.desc-list-item{
+    height: 100%;
+    background-color: #f25858;
+    margin-block-end: var(--desc-block-padding);
+}
+
+.desc-list-item:first-of-type{
+    background-color: aliceblue;
+}
+.desc-list-item h3{
+    line-height: 1;
+    margin: 0;
+}
