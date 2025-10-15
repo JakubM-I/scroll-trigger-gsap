@@ -25,6 +25,7 @@ html {
 
 .page-section.first{
     background-color: #f2f258;
+    height: 100vh;
 }
 
 .page-section.second{
