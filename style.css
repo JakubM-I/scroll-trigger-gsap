@@ -31,9 +31,29 @@ html {
 .page-section.second{
     background-color: #58f2a6;
 }
+.page-section.third{
+margin-block-end: -100px;
+z-index: 3;
+}
+
+.page-section.long{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.page-section.fourth{
+    background-color: #a658f2;
+    width: 100%;
+    z-index: 2;
+}
 
 .page-section.last{
-    background-color: #a658f2;
+    background-color: #a7e96d;
+    width: 100%;
+    z-index: 2;
 }
 
 .animated-div {
