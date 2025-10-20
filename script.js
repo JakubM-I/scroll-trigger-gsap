@@ -31,16 +31,121 @@ gsap.from(".page-section.second", {
 }
 );
 // const descs = gsap.utils.toArray(".description");
-const descs = document.querySelector(".desc-list");
-const titles = document.querySelectorAll(".title-list-item");
-// const dess = gsap.utils.toArray(".desc-list-item")
+// const descs = document.querySelector(".desc-list");
+const titles = gsap.utils.toArray(".title-list-item");
+const descriptions = gsap.utils.toArray(".desc-list-item")
 const totalTitles = titles.length;
 
 // const descHeight = Math.floor(descs.offsetHeight);
-const descHeight = descs.offsetHeight;
-console.log(descHeight * totalTitles);
-const descItemHeight = (descHeight * totalTitles) + "px";
-console.log(descItemHeight);
+// const descHeight = descs.offsetHeight;
+// console.log(descHeight * totalTitles);
+// const descItemHeight = (descHeight * totalTitles) + "px";
+// console.log(descItemHeight);
+
+
+
+// const mainTrigger = ScrollTrigger.create({
+//     trigger: ".page-section.long",
+//     start: "top top",
+//     end: "bottom bottom",
+//     markers: true,
+// })
+
+
+const tl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".page-section.long",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        markers: true,
+        onUpdate: (self) => {
+            const progress = self.progress;
+            const currentIndex = Math.floor(progress * totalTitles);
+            const clampedIndex = Math.min(currentIndex, totalTitles - 1);
+
+            upadateActiveElements(clampedIndex);
+        }
+    }
+});
+
+let currentActiveIndex = 0;
+
+const upadateActiveElements = (index) => {
+    if (index === currentActiveIndex) return;
+
+    titles.forEach((title, i) => {
+        if (i === index) {
+            title.classList.add("active");
+            gsap.to(title, {
+                scale: 1.1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        } else {
+            title.classList.remove("active");
+            gsap.to(title, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+    });
+
+
+    if(currentActiveIndex !== index && currentActiveIndex >= 0){
+        const currentDesc = descriptions[currentActiveIndex];
+        gsap.to(currentDesc, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            ease: "power2.out",
+            onComplete: () => {
+                currentDesc.classList.remove("active");
+                currentDesc.style.poiunterEvents = "none";
+            }
+        })
+    }
+
+    const newDesc = descriptions[index];
+    newDesc.style.pointerEvents = "auto";
+    gsap.to(newDesc, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onStart: () => {
+            newDesc.classList.add("active");
+        }
+    });
+
+    currentActiveIndex = index;
+
+    // descriptions.forEach((desc, i) => {
+    //     if (i === index) {
+    //         desc.classList.add("active");
+    //         gsap.to(desc, {
+    //             opacity: 1,
+    //             y: 0,
+    //             duration: 0.5,
+    //             ease: "power2.out"
+    //         });
+    //     } else {
+    //         desc.classList.remove("active");
+    //         gsap.to(desc, {
+    //             opacity: 0,
+    //             y: 20,
+    //             duration: 0.3,
+    //             ease: "power2.out"
+    //         })
+    //     }
+    // });
+};
+
+
+gsap.set(descriptions, { opacity: 0, y: 20 });
+gsap.set(descriptions[0], { opacity: 1, y: 0 });
+
 
 // gsap.to(".page-section.long", {
 //     scrollTrigger: {
