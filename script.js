@@ -11,8 +11,8 @@ const endAnimation = () => {
     alert("Animacja zakończona");
 };
 
-let tl = gsap.timeline({ onComplete: endAnimation });
-tl
+let tl2 = gsap.timeline({ onComplete: endAnimation });
+tl2
     .from(".container-body h1", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" })
     .from(".container-body p", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5");
 
@@ -33,24 +33,27 @@ gsap.from(".page-section.second", {
 // const descs = gsap.utils.toArray(".description");
 const descs = document.querySelector(".desc-list");
 const titles = document.querySelectorAll(".title-list-item");
+// const dess = gsap.utils.toArray(".desc-list-item")
 const totalTitles = titles.length;
 
-const descHeight = Math.floor(descs.offsetHeight);
-console.log(descHeight);
+// const descHeight = Math.floor(descs.offsetHeight);
+const descHeight = descs.offsetHeight;
+console.log(descHeight * totalTitles);
+const descItemHeight = (descHeight * totalTitles) + "px";
+console.log(descItemHeight);
 
-
-gsap.to(".page-section.long", {
-    scrollTrigger: {
-        trigger: ".page-section.long",
-        start: "top 20%",
-        end: "bottom +=1000",
-        scrub: true,
-        pin: true,
-        pinSpacing: false,
-        markers: true,
-    }
-}
-);
+// gsap.to(".page-section.long", {
+//     scrollTrigger: {
+//         trigger: ".page-section.long",
+//         start: "top 20%",
+//         end: "bottom bottom",
+//         scrub: true,
+//         pin: true,
+//         pinSpacing: false,
+//         markers: fetch,
+//     }
+// }
+// );
 
 // titles.forEach((title, index) => {
 //     gsap.to(title, {
@@ -79,5 +82,74 @@ gsap.to(".page-section.long", {
 //         pin: true,
 //         start: "top bottom",
 //         markers: true,
+//     }
+// })
+
+// const tl = gsap.timeLine({
+//     scrollTrigger: {
+//         trigger: ".page-section.third",
+//         start: "top top",
+//         end: "+=500%",
+//         scrub: true,
+//         pin: true,
+//         pinSpacing: false,
+//         pinContainer: ".page-section.long",
+//         markers: true,
+//     }
+// })
+
+// titles.forEach((title, index) => {
+//     if(titles[index + 1]){
+//         tl.to(title, {
+//             color: "#fff",
+//             scale: 1.2,
+//             duration: 1,
+//         }).to(titles[index + 1], {
+//             color: "#000",
+//             scale: 1,
+//             duration: 1,
+//         }, "<").to(descs, {yPrecent: -(100 * (index +1)), ease: "none"}, "<")
+//     }
+// })
+
+// const mainPin = ScrollTrigger.create({
+//     trigger: ".page-section.long",
+//     start: "top 20%",
+//     end: "bottom bottom",
+//     pin: true,
+//     pinSpacing: false,
+//     markers: true,
+
+//       onUpdate: (self) => {
+//     console.log('Progress:', self.progress);
+//   }
+// })
+// () => "+=" + descItemHeight,
+
+// let tl = gsap.timeline({
+//     scrollTrigger: {
+//         trigger: ".page-section.long",
+//         start: "top 20%",
+//         end: () => "+=" + descItemHeight,
+//         pin: true,
+//         scrub: true,
+//         markers: {
+//             startColor: "blue",
+//             endColor: "red",
+//         },
+//     }
+// })
+
+// titles.forEach((title, index) => {
+//     if(titles[index + 1]){
+//         tl.to(title, {
+//             color: "#fff",
+//             scale: 1.2,
+//             duration: 1,
+//         }).to(titles[index + 1], {
+//             color: "#000",
+//             scale: 1,
+//             duration: 1,
+//         }, "<").to(descs, {yPrecent: -(100 * (index +1)), ease: "none"}, "<")
 //     }
 // })
