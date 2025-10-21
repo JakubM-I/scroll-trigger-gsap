@@ -51,19 +51,26 @@ html {
     display: block;
     display: grid;
     place-items: center;
+    justify-content: unset;
+    align-items: unset;
+    margin-block-end: 20%;
 }
 
 .page-section.third{
     z-index: 3;
    width: 100%;
+   /* display: block; */
 }
 
 .slider-wrapper{
  position: relative;
+ width: 100%;
 }
 
 .page-section.fourth{
-    background-color: #a658f2;
+    /* background-color: #a658f2; */
+    background: linear-gradient(0deg,rgba(166, 88, 242, 1) 11%, rgba(147, 5, 255, 0.87) 41%, rgba(255, 255, 255, 1) 100%);
+
     height: 60vh;
     width: min(1400px, 100%);
     z-index: 2;
@@ -73,11 +80,31 @@ html {
     bottom: -25%;
 }
 
-.page-section.last{
+.page-section.fourth img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-section.fifth{
     background-color: #a7e96d;
     width: 100%;
     height: 60vh;
     z-index: 2;
+    /* margin-block-start: 25%; */
+}
+
+.page-section.sixth{
+    background-color: #f29b58;
+    width: 100%;
+    height: 60vh;
+    z-index: 2;
+    /* margin-block-start: 25%; */
+}
+
+.page-section.last{
+    background-color: #58a3f2;
+    height: 60vh;
 }
 
 .animated-div {
@@ -88,11 +115,11 @@ html {
     align-items: center;
     gap: 20px;
     z-index: 3;
-    position: relative;
+    position: relative; 
 }
 
 .title-list{
-    width: 450px;
+    width: min(450px, 100%);
     height: 300px;
     background-color: #f25858;
     border-radius: 10px;
@@ -116,7 +143,7 @@ html {
 }
 
 .desc-list{
-    width: 550px;
+    width: min(550px, 100%);
     height: 180px;
     background-color: aliceblue;
     border-radius: 10px;
@@ -151,4 +178,51 @@ html {
 .desc-list-item h3{
     line-height: 1;
     margin: 0;
+}
+
+.image-srcoll-wrapper{
+    width: 100%;
+    height: 200vh;
+    position: relative;
+}
+
+.bottom-banner{
+  display: grid;
+    place-items: center;
+}
+.bottom-banner__wrapper{
+  display: grid;
+    place-items: center;
+}
+
+.bottom-banner__img{
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+.bottom-banner__body{
+    z-index: 2;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    place-self: center;
+    width: 100%;
+    height: 100%;
+    background: #00000078;
+    display: grid;
+    place-items: center;
+}
+
+.bottom-banner__h2{
+    color: white;
+    font-size: 3rem;
+    align-self: end;
+}
+
+.bottom-banner__h3{
+    color: white;
+    font-size: 1.5rem;
+    align-self: start;
 }

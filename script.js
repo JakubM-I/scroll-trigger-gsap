@@ -58,7 +58,7 @@ const tl = gsap.timeline({
         start: "top top",
         end: "bottom bottom",
         scrub: 1,
-        markers: true,
+        // markers: true,
         onUpdate: (self) => {
             const progress = self.progress;
             const currentIndex = Math.floor(progress * totalTitles);
