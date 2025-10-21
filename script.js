@@ -147,6 +147,21 @@ gsap.set(descriptions, { opacity: 0, y: 20 });
 gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 
+const bannerTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".image-srcoll-wrapper",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        markera: true,
+    }
+})
+
+bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 }, 0)
+    .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, 0)
+    .to(".bootom-banner__body", {backgroundColor: transparent, duration: 1}, 0)
+
+
 // gsap.to(".page-section.long", {
 //     scrollTrigger: {
 //         trigger: ".page-section.long",
