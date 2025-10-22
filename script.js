@@ -157,10 +157,13 @@ const bannerTl = gsap.timeline({
     }
 })
 
-bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 }, 0)
-    .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, 0)
-    .to(".bootom-banner__body", {backgroundColor: transparent, duration: 1}, 0)
-
+bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 })
+    .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, "<")
+    .to(".bottom-banner__body", {backgroundColor: "transparent", duration: 0.8}, 0.5)
+    .call(() => {
+        const video = document.querySelector(".bottom-banner__video");
+        video.play();
+    })
 
 // gsap.to(".page-section.long", {
 //     scrollTrigger: {
