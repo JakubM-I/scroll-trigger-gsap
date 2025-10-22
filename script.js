@@ -93,7 +93,7 @@ const upadateActiveElements = (index) => {
     });
 
 
-    if(currentActiveIndex !== index && currentActiveIndex >= 0){
+    if (currentActiveIndex !== index && currentActiveIndex >= 0) {
         const currentDesc = descriptions[currentActiveIndex];
         gsap.to(currentDesc, {
             opacity: 0,
@@ -146,24 +146,43 @@ const upadateActiveElements = (index) => {
 gsap.set(descriptions, { opacity: 0, y: 20 });
 gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
-
+let videoStarted = false;
 const bannerTl = gsap.timeline({
     scrollTrigger: {
         trigger: ".image-srcoll-wrapper",
         start: "top top",
         end: "bottom bottom",
         scrub: 1,
-        markera: true,
+        markers: true,
+        onUpdate: (self) => {
+            if (self.progress > 0.55 && !videoStarted) {
+                const video = document.querySelector(".bottom-banner__video");
+                video.muted = true;
+                video.play();
+                videoStarted = true;
+            }
+
+            if (self.progress < 0.55 && videoStarted) {
+                const video = document.querySelector(".bottom-banner__video");
+                video.pause();
+                videoStarted = false;
+            }
+        }
     }
 })
 
 bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 })
     .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, "<")
-    .to(".bottom-banner__body", {backgroundColor: "transparent", duration: 0.8}, 0.5)
-    .call(() => {
-        const video = document.querySelector(".bottom-banner__video");
-        video.play();
-    })
+    .to(".bottom-banner__body", { backgroundColor: "transparent", duration: 0.8 }, 0.5)
+
+
+
+
+// .call(() => {
+//     const video = document.querySelector(".bottom-banner__video");
+//     video.muted = true;
+//     video.play();
+// })
 
 // gsap.to(".page-section.long", {
 //     scrollTrigger: {
