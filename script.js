@@ -147,6 +147,7 @@ gsap.set(descriptions, { opacity: 0, y: 20 });
 gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 let videoStarted = false;
+let videoPaused = false;
 const bannerTl = gsap.timeline({
     scrollTrigger: {
         trigger: ".image-srcoll-wrapper",
@@ -155,17 +156,32 @@ const bannerTl = gsap.timeline({
         scrub: 1,
         markers: true,
         onUpdate: (self) => {
-            if (self.progress > 0.55 && !videoStarted) {
-                const video = document.querySelector(".bottom-banner__video");
-                video.muted = true;
-                video.play();
-                videoStarted = true;
-            }
+            const video = document.querySelector(".bottom-banner__video");
+            const startPlay = 0.55;
+            const endPlay = 0.89;
 
-            if (self.progress < 0.55 && videoStarted) {
-                const video = document.querySelector(".bottom-banner__video");
-                video.pause();
-                videoStarted = false;
+            if (self.progress > startPlay && self.progress < endPlay) {
+                if (!videoStarted || videoPaused) {
+                    video.muted = true;
+                    video.play();
+                    videoStarted = true;
+                    videoPaused = false;
+                }
+            } else if (self.progress <= startPlay) {
+                if (videoStarted && !videoPaused) {
+                    {
+                        video.pause();
+                        videoPaused = true;
+                    }
+                }
+            }
+            else if (self.progress >= endPlay) {
+                if (videoStarted && !videoPaused) {
+                    {
+                        video.pause();
+                        videoPaused = true;
+                    }
+                }
             }
         }
     }
@@ -174,6 +190,24 @@ const bannerTl = gsap.timeline({
 bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 })
     .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, "<")
     .to(".bottom-banner__body", { backgroundColor: "transparent", duration: 0.8 }, 0.5)
+
+
+
+// onUpdate: (self) => {
+//             if (self.progress > 0.55 && !videoStarted) {
+//                 const video = document.querySelector(".bottom-banner__video");
+//                 video.muted = true;
+//                 video.play();
+//                 videoStarted = true;
+//             }
+
+//             if (self.progress < 0.55 && videoStarted) {
+//                 const video = document.querySelector(".bottom-banner__video");
+//                 video.pause();
+//                 videoStarted = false;
+//             }
+//         }
+
 
 
 
