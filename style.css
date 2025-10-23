@@ -31,6 +31,24 @@ body{
     height: 100vh;
 }
 
+.container-body h1{
+    font-family: "Electrolize", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #24394f;
+    text-align: center;
+    margin-block: 0 15px;
+}
+
+.container-body h2{
+    font-family: "Iceland", sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #24394f;
+    text-align: center;
+    margin-block: 0 25px;
+}
+
 .page-section.second{
     background-color: #58f2a6;
     height: 60vh;
@@ -124,20 +142,23 @@ body{
 
 .title-list{
     width: min(450px, 100%);
-    height: 300px;
+    /* height: 300px; */
+    padding-block: 35px;
     background-color: #f25858;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 25px;
 }
 
 .title-list-item{
-    font-size: 25px;
-    font-weight: 600;
+    font-family: "Electrolize", sans-serif;
+    font-size: 38px;
+    font-weight: 700;
     color: #f5d6d6;
-    margin-block-end: 10px;
+    /* margin-block-end: 10px; */
     opacity: 0.5;
     transition: opacity 0.3s ease;
 }
@@ -147,21 +168,43 @@ body{
 }
 
 .desc-list{
-    width: min(550px, 100%);
+    width: min(750px, 100%);
     height: 180px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.desc-list-images,
+.desc-list-texts{
     background-color: aliceblue;
     border-radius: 10px;
     padding: var(--desc-block-padding);
     overflow: hidden;
-    position: relative
+    position: relative;
+    flex: 0 0 48%;
 }
 
-.desc-list-item{
+.desc-list-images__item{
+
+}
+
+.desc-list-images__img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 300 / 260;
+}
+
+.desc-list-item,
+.desc-list-images__item{
     height: 100%;
     opacity: 0;
     /* background-color: aliceblue; */
     /* margin-block-end: var(--desc-block-padding); */
-       border-radius: 10px;
+    border-radius: 10px;
     padding: var(--desc-block-padding);
     pointer-events: none;
     position: absolute;
@@ -170,7 +213,8 @@ body{
     width: 100%;
 }
 
-.desc-list-item.active{
+.desc-list-item.active,
+.desc-list-images__item.active{
     opacity: 1;
     background-color: aliceblue;
     pointer-events: auto;
@@ -180,8 +224,16 @@ body{
     background-color: aliceblue;
 } */
 .desc-list-item h3{
+    font-family: "Electrolize", sans-serif;
+    font-size: 22px;
     line-height: 1;
     margin: 0;
+}
+
+.desc-list-item p{
+     font-family: "Iceland", sans-serif;
+     font-size: 18px;
+     line-height: 1.3;
 }
 
 .image-srcoll-wrapper{

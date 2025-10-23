@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Iceland&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
     <script src="/lib/gsap.min.js" defer></script>
     <script src="/lib/ScrollTrigger.min.js" defer></script>
@@ -15,7 +18,8 @@
     <div class="page-container">
         <div class="page-section first">
             <div class="container-body">
-                <h1>ScrollTrigger - test</h1>
+                <h1>ScrollTrigger</h1>
+                <h2>Test</h2>
                 <p>Przewiń w dól</p>
             </div>
         </div>
@@ -33,29 +37,45 @@
                                 <div class="title-list-item">Tytul 3</div>
                             </div>
                             <div class="desc-list">
-                                <div class="desc-list-item active">
-                                    <h3>Tytul 1</h3>
-                                    <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                        scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat
-                                        facilisis
-                                        mollis.
-                                        Duis sagittis ligula in sodales vehicula....</p>
+                                <div class="desc-list-images">
+                                    <div class="desc-list-images__item active">
+                                        <img class="desc-list-images__img" src="https://picsum.photos/300/260?random=1" alt="Random Image 1">
+                                    </div>
+                                    <div class="desc-list-images__item">
+                                        <img class="desc-list-images__img" src="https://picsum.photos/300/260?random=2" alt="Random Image 2">
+                                    </div>
+                                    <div class="desc-list-images__item">
+                                        <img class="desc-list-images__img" src="https://picsum.photos/300/260?random=3" alt="Random Image 3">
+                                    </div>
                                 </div>
-                                <div class="desc-list-item">
-                                    <h3>Tytul 2</h3>
-                                    <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                        scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat
-                                        facilisis
-                                        mollis.
-                                        Duis sagittis ligula in sodales vehicula....</p>
-                                </div>
-                                <div class="desc-list-item">
-                                    <h3>Tytul 3</h3>
-                                    <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                        scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat
-                                        facilisis
-                                        mollis.
-                                        Duis sagittis ligula in sodales vehicula....</p>
+                                <div class="desc-list-texts">
+                                    <div class="desc-list-item active">
+                                        <h3>Tytul 1</h3>
+                                        <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                                            scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas
+                                            placerat
+                                            facilisis
+                                            mollis.
+                                            Duis sagittis ligula in sodales vehicula....</p>
+                                    </div>
+                                    <div class="desc-list-item">
+                                        <h3>Tytul 2</h3>
+                                        <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                                            scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas
+                                            placerat
+                                            facilisis
+                                            mollis.
+                                            Duis sagittis ligula in sodales vehicula....</p>
+                                    </div>
+                                    <div class="desc-list-item">
+                                        <h3>Tytul 3</h3>
+                                        <p>lorrem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                                            scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas
+                                            placerat
+                                            facilisis
+                                            mollis.
+                                            Duis sagittis ligula in sodales vehicula....</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +96,8 @@
             <div class="page-section sticky">
                 <div class="bottom-banner">
                     <div class="bottom-banner__wrapper">
-                        <video class="bottom-banner__video" src="/video/5892345-hd_1280_720_25fps.mp4" muted loop playsinline></video>
+                        <video class="bottom-banner__video" src="/video/5892345-hd_1280_720_25fps.mp4" muted loop
+                            playsinline></video>
                         <!-- <img class="bottom-banner__img" src="https://picsum.photos/1200/800" alt="Random Image"> -->
                         <div class="bottom-banner__body">
                             <h2 class="bottom-banner__h2">To juz ostatni blok animacji</h2>

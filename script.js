@@ -14,6 +14,7 @@ const endAnimation = () => {
 let tl2 = gsap.timeline({ onComplete: endAnimation });
 tl2
     .from(".container-body h1", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" })
+    .from(".container-body h2", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
     .from(".container-body p", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5");
 
 gsap.from(".page-section.second", {
@@ -33,7 +34,8 @@ gsap.from(".page-section.second", {
 // const descs = gsap.utils.toArray(".description");
 // const descs = document.querySelector(".desc-list");
 const titles = gsap.utils.toArray(".title-list-item");
-const descriptions = gsap.utils.toArray(".desc-list-item")
+const descriptions = gsap.utils.toArray(".desc-list-item");
+const images = gsap.utils.toArray(".desc-list-images__item");
 const totalTitles = titles.length;
 
 // const descHeight = Math.floor(descs.offsetHeight);
@@ -104,7 +106,19 @@ const upadateActiveElements = (index) => {
                 currentDesc.classList.remove("active");
                 currentDesc.style.poiunterEvents = "none";
             }
-        })
+        });
+
+        const currentImage = images[currentActiveIndex];
+        gsap.to(currentImage, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            ease: "power2.out",
+            onComplete: () => {
+                currentImage.classList.remove("active");
+                currentImage.style.pointerEvents = "none";
+            }
+        });
     }
 
     const newDesc = descriptions[index];
@@ -116,6 +130,18 @@ const upadateActiveElements = (index) => {
         ease: "power2.out",
         onStart: () => {
             newDesc.classList.add("active");
+        }
+    });
+
+    const newImage = images[index];
+    newImage.style.pointerEvents = "auto";
+    gsap.to(newImage, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onStart: () => {
+            newImage.classList.add("active");
         }
     });
 
@@ -145,6 +171,8 @@ const upadateActiveElements = (index) => {
 
 gsap.set(descriptions, { opacity: 0, y: 20 });
 gsap.set(descriptions[0], { opacity: 1, y: 0 });
+
+
 
 let videoStarted = false;
 let videoPaused = false;
