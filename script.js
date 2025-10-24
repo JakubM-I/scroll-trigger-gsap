@@ -24,21 +24,26 @@ const endAnimation = () => {
         });
     };
 
-    // gsap.set(countdownNumbers, { opacity: 0});
+    gsap.set(countdownNumbers, { opacity: 0});
 
-let tl2 = gsap.timeline({onComplete: countdown});
+let tl2 = gsap.timeline();
 tl2
-    .from(".container-body h1", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" })
+    .from(".container-body h1", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out", delay: 0.5 })
     .from(".container-body h2", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
     .from(".countdown-ready", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
-    .to(".countdown-ready", { opacity: 0, duration: 0.5, ease: "power2.in", delay: 1.5 })
-    // .from(".countdown-n3", {opacity: 0, duration: 0.5, ease: "power2.out" }, "-=0.5")
-    // .to(".countdown-n3", {opacity: 0, duration: 0.5, ease: "power2.out", delay: 1 }, "<")
-    
-
-
-
+    .to(".countdown-ready", { opacity: 0, duration: 0.5, ease: "power2.in", delay: 0.5 })
+    .to(".countdown-n3", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n3", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
+    .to(".countdown-n2", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n2", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6})
+    .to(".countdown-n1", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n1", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
+    .to(".countdown-go", {opacity: 1, duration: 0.5, ease: "power2.out" })
+    .from(".go-scroll", {opacity: 0, duration: 1, ease: "power2.out" }, "+=0.5")
 // gsap.set(descriptions[0], { opacity: 1, y: 0 });
+
+
+
 
 gsap.from(".page-section.second", {
     x: "-1000px",
@@ -48,7 +53,7 @@ gsap.from(".page-section.second", {
     ease: "power2.out",
     scrollTrigger: {
         trigger: ".page-section.second",
-        start: "top 90%",
+        start: "top 98%",
         end: "bottom center",
         toggleActions: "play none none none",
     }
