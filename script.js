@@ -11,11 +11,34 @@ const endAnimation = () => {
     alert("Animacja zakończona");
 };
 
-let tl2 = gsap.timeline({ onComplete: endAnimation });
+// Dodanie wywolania funkcji po zakonczeniu animacji
+// let tl2 = gsap.timeline({ onComplete: endAnimation }); 
+
+    const countdownNumbers = gsap.utils.toArray([".countdown-n3", ".countdown-n2", ".countdown-n1", ".countdown-go"]);
+
+    const countdown = () => {
+        let numberTl = gsap.timeline();
+        countdownNumbers.forEach((selector, index) => {
+            numberTl.from(selector, { opacity: 0, duration: 1, ease: "power2.out" })
+                .to(selector, { opacity: 0, duration: 0.5, ease: "power2.in", delay: 1 });
+        });
+    };
+
+    // gsap.set(countdownNumbers, { opacity: 0});
+
+let tl2 = gsap.timeline({onComplete: countdown});
 tl2
     .from(".container-body h1", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" })
     .from(".container-body h2", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
-    .from(".container-body p", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5");
+    .from(".countdown-ready", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
+    .to(".countdown-ready", { opacity: 0, duration: 0.5, ease: "power2.in", delay: 1.5 })
+    // .from(".countdown-n3", {opacity: 0, duration: 0.5, ease: "power2.out" }, "-=0.5")
+    // .to(".countdown-n3", {opacity: 0, duration: 0.5, ease: "power2.out", delay: 1 }, "<")
+    
+
+
+
+// gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 gsap.from(".page-section.second", {
     x: "-1000px",

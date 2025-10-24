@@ -49,6 +49,54 @@ body{
     margin-block: 0 25px;
 }
 
+.countdown-container{
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    position: relative;
+    font-family: "Iceland", sans-serif;
+    font-size: 38px;
+    background: #58a3f2;
+    height: 60px;
+}
+
+.countdown-text{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.countdown-ready{
+    z-index: 1;
+}
+
+.countdown-n3{
+    z-index: 2;
+}
+
+.countdown-n2{
+    z-index: 3;
+}
+
+.countdown-n1{
+    z-index: 4;
+}
+
+.countdown-go{
+    z-index: 5;
+}
+
+.go-scroll{
+    font-family: "Electrolize", sans-serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: #244f36;
+    text-align: center;
+}
+
 .page-section.second{
     background-color: #58f2a6;
     height: 60vh;
