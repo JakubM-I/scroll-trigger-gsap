@@ -31,6 +31,18 @@ body{
     height: 100vh;
 }
 
+.container-body.columns2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 100%;
+}
+
+.left-container{
+    padding: 25px;
+    align-self: stretch;
+}
+
 .container-body h1{
     font-family: "Electrolize", sans-serif;
     font-size: 48px;
@@ -40,7 +52,8 @@ body{
     margin-block: 0 15px;
 }
 
-.container-body h2{
+.container-body h2,
+.page-section.third h2{
     font-family: "Iceland", sans-serif;
     font-size: 42px;
     font-weight: 700;
@@ -128,8 +141,12 @@ body{
 
 .page-section.third{
     z-index: 3;
-   width: 100%;
-   /* display: block; */
+    width: 100%;
+    flex-direction: column;
+}
+
+.page-section.third h2{
+    color: #fff;
 }
 
 .slider-wrapper{
