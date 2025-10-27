@@ -209,7 +209,7 @@ const bannerTl = gsap.timeline({
         start: "top top",
         end: "bottom bottom",
         scrub: 1,
-        markers: true,
+        // markers: true,
         onUpdate: (self) => {
             const video = document.querySelector(".bottom-banner__video");
             const startPlay = 0.55;
