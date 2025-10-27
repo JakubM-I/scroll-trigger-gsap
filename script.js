@@ -28,8 +28,8 @@ gsap.set(countdownNumbers, { opacity: 0 });
 gsap.set(".first .container-body h1", { opacity: 0, x: -1000 });
 gsap.set(".first .container-body h2", { opacity: 0, x: -1000 });
 gsap.set(".countdown-ready", { opacity: 0, x: -1000 });
-gsap.set("countdown-go", { opacity: 0 });
-gsap.set("go-scroll", { opacity: 0 });
+gsap.set(".countdown-go", { opacity: 0 });
+gsap.set(".go-scroll", { opacity: 0 });
 
 let tl2 = gsap.timeline();
 tl2
