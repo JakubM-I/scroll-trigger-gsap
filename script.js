@@ -14,17 +14,17 @@ const endAnimation = () => {
 // Dodanie wywolania funkcji po zakonczeniu animacji
 // let tl2 = gsap.timeline({ onComplete: endAnimation }); 
 
-    const countdownNumbers = gsap.utils.toArray([".countdown-n3", ".countdown-n2", ".countdown-n1", ".countdown-go"]);
+const countdownNumbers = gsap.utils.toArray([".countdown-n3", ".countdown-n2", ".countdown-n1", ".countdown-go"]);
 
-    const countdown = () => {
-        let numberTl = gsap.timeline();
-        countdownNumbers.forEach((selector, index) => {
-            numberTl.from(selector, { opacity: 0, duration: 1, ease: "power2.out" })
-                .to(selector, { opacity: 0, duration: 0.5, ease: "power2.in", delay: 1 });
-        });
-    };
+const countdown = () => {
+    let numberTl = gsap.timeline();
+    countdownNumbers.forEach((selector, index) => {
+        numberTl.from(selector, { opacity: 0, duration: 1, ease: "power2.out" })
+            .to(selector, { opacity: 0, duration: 0.5, ease: "power2.in", delay: 1 });
+    });
+};
 
-    gsap.set(countdownNumbers, { opacity: 0});
+gsap.set(countdownNumbers, { opacity: 0 });
 
 let tl2 = gsap.timeline();
 tl2
@@ -32,14 +32,14 @@ tl2
     .from(".container-body h2", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
     .from(".countdown-ready", { x: "-1000px", opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
     .to(".countdown-ready", { opacity: 0, duration: 0.5, ease: "power2.in", delay: 0.5 })
-    .to(".countdown-n3", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
-    .to(".countdown-n3", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
-    .to(".countdown-n2", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
-    .to(".countdown-n2", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6})
-    .to(".countdown-n1", {opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
-    .to(".countdown-n1", {opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
-    .to(".countdown-go", {opacity: 1, duration: 0.5, ease: "power2.out" })
-    .from(".go-scroll", {opacity: 0, duration: 1, ease: "power2.out" }, "+=0.5")
+    .to(".countdown-n3", { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n3", { opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
+    .to(".countdown-n2", { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n2", { opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
+    .to(".countdown-n1", { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" })
+    .to(".countdown-n1", { opacity: 0, scale: 1.3, duration: 0.3, ease: "power2.out", delay: 0.6 })
+    .to(".countdown-go", { opacity: 1, duration: 0.5, ease: "power2.out" })
+    .from(".go-scroll", { opacity: 0, duration: 1, ease: "power2.out" }, "+=0.5")
 // gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 
@@ -57,8 +57,7 @@ gsap.from(".page-section.second", {
         end: "bottom center",
         toggleActions: "play none none none",
     }
-}
-);
+});
 // const descs = gsap.utils.toArray(".description");
 // const descs = document.querySelector(".desc-list");
 const titles = gsap.utils.toArray(".title-list-item");
@@ -247,6 +246,21 @@ bannerTl.to(".bottom-banner__h2", { y: -180, opacity: 0, duration: 0.5 })
     .to(".bottom-banner__h3", { y: 180, opacity: 0, duration: 0.5 }, "<")
     .to(".bottom-banner__body", { backgroundColor: "transparent", duration: 0.8 }, 0.5)
 
+
+
+// gsap.from(".page-section.last", {
+//     x: "-1000px",
+//     opacity: 0,
+//     duration: 1,
+//     delay: 0.5,
+//     ease: "power2.out",
+//     scrollTrigger: {
+//         trigger: ".image-srcoll-wrapper",
+//         start: "top 98%",
+//         end: "bottom center",
+//         toggleActions: "play none none none",
+//     }
+// });
 
 
 // onUpdate: (self) => {

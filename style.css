@@ -36,11 +36,13 @@ body{
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     height: 100%;
+    width: 100%;
 }
 
 .left-container{
     padding: 25px;
-    align-self: stretch;
+    align-self: self-start;
+    justify-self: self-start;
 }
 
 .container-body h1{
@@ -192,6 +194,7 @@ body{
 .page-section.last{
     background-color: #58a3f2;
     height: 60vh;
+    transform: translateY(-100px);
 }
 
 .animated-div {
