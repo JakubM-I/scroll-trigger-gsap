@@ -399,6 +399,18 @@ body {
     height: 455px;
 }
 
+
+/* .page-section.feature{
+    height: 300vh;
+    width: 100%;
+    display: block;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: stretch;
+} */
+
+/* Observer version */
 .page-section.feature{
     /* height: 300vh; */
     width: 100%;
@@ -460,17 +472,29 @@ body {
     gap: 25px;
 }
 
-.feature .page-section.sticky {
+/* .feature .page-section.sticky {
     position: sticky;
     top: 0;
     height: auto;
-    /* width: 100%; */
     z-index: 4;
     display: block;
     display: grid;
     place-items: center;
     justify-content: unset;
     align-items: unset;
-    /* margin-block-end: 20%; */
+    margin-block: 70px;
+} */
+
+/* Observer version */
+.feature .page-section.sticky {
+    position: relative;
+    top: 0;
+    height: auto;
+    z-index: 4;
+    display: block;
+    display: grid;
+    place-items: center;
+    justify-content: unset;
+    align-items: unset;
     margin-block: 70px;
 }
