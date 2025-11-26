@@ -207,129 +207,34 @@ gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 // Features section
 
-// const featuresTitles = gsap.utils.toArray(".features-title-item");
-// const featureDescriptions = gsap.utils.toArray(".features-descs-item");
-// const featureImages = gsap.utils.toArray(".features-images__item");
-// const featureTotalTitles = featuresTitles.length;
-
-// const featTl = gsap.timeline({
-//     scrollTrigger: {
-//         trigger: ".page-section.feature",
-//         start: "center center",
-//         end: "+=1000",
-//         pin: true,
-//         scrub: true,
-//         pinSpacing: true,
-//         // markers: true,
-//         onUpdate: (self) => {
-//             const progress = self.progress;
-//             const currentIndex = Math.floor(progress * featureTotalTitles);
-//             const clampedIndex = Math.min(currentIndex, featureTotalTitles - 1);
-
-//             upadateFeatureActiveElements(clampedIndex);
-//         }
-//     }
-// });
-
-// let currentFeatureActiveIndex = 0;
-
-// const upadateFeatureActiveElements = (index) => {
-//     if (index === currentFeatureActiveIndex) return;
-
-//     featuresTitles.forEach((title, i) => {
-//         if (i === index) {
-//             title.classList.add("active");
-//             gsap.to(title, {
-//                 scale: 1.1,
-//                 duration: 0.3,
-//                 ease: "power2.out"
-//             });
-//         } else {
-//             title.classList.remove("active");
-//             gsap.to(title, {
-//                 scale: 1,
-//                 duration: 0.3,
-//                 ease: "power2.out"
-//             });
-//         }
-//     });
-
-
-//     if (currentFeatureActiveIndex !== index && currentFeatureActiveIndex >= 0) {
-//         const currentDesc = featureDescriptions[currentFeatureActiveIndex];
-//         gsap.to(currentDesc, {
-//             opacity: 0,
-//             y: -20,
-//             duration: 0.3,
-//             ease: "power2.out",
-//             onComplete: () => {
-//                 currentDesc.classList.remove("active");
-//                 currentDesc.style.poiunterEvents = "none";
-//             }
-//         });
-
-//         const currentImage = featureImages[currentFeatureActiveIndex];
-//         gsap.to(currentImage, {
-//             opacity: 0,
-//             y: -20,
-//             duration: 0.3,
-//             ease: "power2.out",
-//             onComplete: () => {
-//                 currentImage.classList.remove("active");
-//                 currentImage.style.pointerEvents = "none";
-//             }
-//         });
-//     }
-
-//     const newDesc = featureDescriptions[index];
-//     newDesc.style.pointerEvents = "auto";
-//     gsap.to(newDesc, {
-//         opacity: 1,
-//         y: 0,
-//         duration: 0.5,
-//         ease: "power2.out",
-//         onStart: () => {
-//             newDesc.classList.add("active");
-//         }
-//     });
-
-//     const newImage = featureImages[index];
-//     newImage.style.pointerEvents = "auto";
-//     gsap.to(newImage, {
-//         opacity: 1,
-//         y: 0,
-//         duration: 0.5,
-//         ease: "power2.out",
-//         onStart: () => {
-//             newImage.classList.add("active");
-//         }
-//     });
-
-//     currentFeatureActiveIndex = index;
-
-// };
-
-// gsap.set(featureDescriptions, { opacity: 0, y: 20 });
-// gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
-
-
-
-// Observer version
-
-const featureSection = document.querySelector(".page-section.feature");
 const featuresTitles = gsap.utils.toArray(".features-title-item");
 const featureDescriptions = gsap.utils.toArray(".features-descs-item");
 const featureImages = gsap.utils.toArray(".features-images__item");
 const featureTotalTitles = featuresTitles.length;
 
+const featTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".section-space",
+        start: "center center",
+        end: "+=1000",
+        pin: true,
+        scrub: true,
+        pinSpacing: true,
+        // markers: true,
+        onUpdate: (self) => {
+            const progress = self.progress;
+            const currentIndex = Math.floor(progress * featureTotalTitles);
+            const clampedIndex = Math.min(currentIndex, featureTotalTitles - 1);
+
+            upadateFeatureActiveElements(clampedIndex);
+        }
+    }
+});
+
 let currentFeatureActiveIndex = 0;
-let isAnimating = false;
-let observerEnabled = false;
 
 const upadateFeatureActiveElements = (index) => {
-    if (index === currentFeatureActiveIndex && index !== 0) return;
-
-    isAnimating = true;
+    if (index === currentFeatureActiveIndex) return;
 
     featuresTitles.forEach((title, i) => {
         if (i === index) {
@@ -348,6 +253,7 @@ const upadateFeatureActiveElements = (index) => {
             });
         }
     });
+
 
     if (currentFeatureActiveIndex !== index && currentFeatureActiveIndex >= 0) {
         const currentDesc = featureDescriptions[currentFeatureActiveIndex];
@@ -373,7 +279,7 @@ const upadateFeatureActiveElements = (index) => {
                 currentImage.style.pointerEvents = "none";
             }
         });
-    };
+    }
 
     const newDesc = featureDescriptions[index];
     newDesc.style.pointerEvents = "auto";
@@ -400,84 +306,188 @@ const upadateFeatureActiveElements = (index) => {
     });
 
     currentFeatureActiveIndex = index;
-}
 
-const intendObserver = Observer.create({
-    target: window,
-    type: "wheel,touch,scroll",
-    // preventDefault: true,
-    enabled: false,
-    tolerance: 50,
-
-    onUp: (self) => {
-        console.log('⬆️ onUp fired, observerEnabled:', observerEnabled);
-
-        if (!observerEnabled || isAnimating) return;
-
-        if (currentFeatureActiveIndex > 0) {
-            self.event.preventDefault();
-            upadateFeatureActiveElements(currentFeatureActiveIndex - 1);
-        } else {
-            observerEnabled = false;
-            intendObserver.disable();
-        }
-    },
-
-    onDown: (self) => {
-         console.log('⬇️ onDown fired, observerEnabled:', observerEnabled);
-
-        if (!observerEnabled || isAnimating) return;
-
-        if (currentFeatureActiveIndex < featureTotalTitles - 1) {
-            self.event.preventDefault();
-            upadateFeatureActiveElements(currentFeatureActiveIndex + 1);
-        } else {
-            observerEnabled = false;
-            intendObserver.disable();
-        }
-    }
-});
-
-ScrollTrigger.create({
-    trigger: featureSection,
-    start: "center center",
-    end: "bottom center",
-    markers: true,
-
-    onEnter: () => {
-         console.log('▶️ onEnter - enabling observer');
-        currentFeatureActiveIndex = 0;
-        upadateFeatureActiveElements(currentFeatureActiveIndex);
-        observerEnabled = true;
-        intendObserver.enable();
-    },
-
-    onLeave: () => {
-                console.log('⏹️ onLeave');
-        observerEnabled = false;
-        intendObserver.disable();
-    },
-
-    onEnterBack: () => {
-        console.log('◀️ onEnterBack - enabling observer');
-        currentFeatureActiveIndex = featureTotalTitles - 1;
-        upadateFeatureActiveElements(currentFeatureActiveIndex);
-        observerEnabled = true;
-        intendObserver.enable();
-    },
-
-    onLeaveBack: () => {
-                console.log('⏹️ onLeaveBack');
-        observerEnabled = false;
-        intendObserver.disable();
-    }
-});
+};
 
 gsap.set(featureDescriptions, { opacity: 0, y: 20 });
 gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 
-console.log('✅ Ready. Total items:', featureTotalTitles);
-console.log('📌 Section:', featureSection);
+
+
+// Observer version
+
+// const featureSection = document.querySelector(".page-section.feature");
+// const featuresTitles = gsap.utils.toArray(".features-title-item");
+// const featureDescriptions = gsap.utils.toArray(".features-descs-item");
+// const featureImages = gsap.utils.toArray(".features-images__item");
+// const featureTotalTitles = featuresTitles.length;
+
+// let currentFeatureActiveIndex = 0;
+// let isAnimating = false;
+// let scrollLocked = false;
+
+// const goToNewElement = (index) => {
+//     if (index === currentFeatureActiveIndex) return;
+
+//     isAnimating = true;
+
+//     const oldIndex = currentFeatureActiveIndex;
+
+//     featuresTitles.forEach((title, i) => {
+//         if (i === index) {
+//             title.classList.add("active");
+//             gsap.to(title, {
+//                 scale: 1.1,
+//                 duration: 0.3,
+//                 ease: "power2.out"
+//             });
+//         } else {
+//             title.classList.remove("active");
+//             gsap.to(title, {
+//                 scale: 1,
+//                 duration: 0.3,
+//                 ease: "power2.out"
+//             });
+//         }
+//     });
+
+//     if (oldIndex >= 0 && oldIndex < featureDescriptions.length) {
+//         const currentDesc = featureDescriptions[oldIndex];
+//         gsap.to(currentDesc, {
+//             opacity: 0,
+//             y: -20,
+//             duration: 0.3,
+//             ease: "power2.out",
+//             onComplete: () => {
+//                 currentDesc.classList.remove("active");
+//                 currentDesc.style.poiunterEvents = "none";
+//             }
+//         });
+
+//         if (featureImages && featureImages.length && featureImages[oldIndex]) {
+//             const currentImage = featureImages[oldIndex];
+//             gsap.to(currentImage, {
+//                 opacity: 0,
+//                 y: -20,
+//                 duration: 0.3,
+//                 ease: "power2.out",
+//                 onComplete: () => {
+//                     currentImage.classList.remove("active");
+//                     currentImage.style.pointerEvents = "none";
+//                 }
+//             });
+//         }
+//     };
+
+//     const newDesc = featureDescriptions[index];
+//     console.log(newDesc);
+//     newDesc.style.pointerEvents = "auto";
+//     gsap.to(newDesc, {
+//         opacity: 1,
+//         y: 0,
+//         duration: 0.5,
+//         ease: "power2.out",
+//         onStart: () => {
+//             newDesc.classList.add("active");
+//         }
+//     });
+
+//     if (featureImages && featureImages.length && featureImages[index]) {
+//         const newImage = featureImages[index];
+//         newImage.style.pointerEvents = "auto";
+//         gsap.to(newImage, {
+//             opacity: 1,
+//             y: 0,
+//             duration: 0.5,
+//             ease: "power2.out",
+//             onStart: () => {
+//                 newImage.classList.add("active");
+//             }
+//         });
+//     }
+
+//     currentFeatureActiveIndex = index;
+// }
+
+// const hanldeScroll = (direction) => {
+//     if (isAnimating) return;
+
+//     if (direction === 1) {
+//         console.log('➡️ scroll down');
+//         if (currentActiveIndex < featureTotalTitles - 1) {
+//             goToNewElement(currentFeatureActiveIndex + 1);
+//         } else {
+//             unlockScroll();
+//         }
+//     }
+
+//     if (direction === -1) {
+//         console.log('⬅️ scroll up');
+//         if (currentActiveIndex > 0) {
+//             goToNewElement(currentFeatureActiveIndex - 1);
+//         } else {
+//             unlockScroll();
+//         }
+//     }
+// }
+
+
+
+// const intendObserver = Observer.create({
+//     target: window,
+//     type: "wheel,touch,scroll",
+//     preventDefault: true,
+//     enabled: false,
+//     tolerance: 10,
+//     onUp: () => hanldeScroll(-1),
+//     onDown: () => hanldeScroll(1),
+// });
+// console.log(intendObserver);
+
+// const lockScroll = () => {
+//     if (scrollLocked) return;
+
+//     scrollLocked = true;
+//     intendObserver.enable();
+// }
+
+// const unlockScroll = () => {
+//     if (!scrollLocked) return;
+//     scrollLocked = false;
+//     intendObserver.disable();
+// }
+
+// ScrollTrigger.create({
+//     trigger: featureSection,
+//     start: "center center",
+//     end: "+=1",
+//     markers: true,
+
+//     onEnter: () => {
+//         lockScroll();
+//     },
+
+//     onEnterBack: () => {
+//         console.log('◀️ onEnterBack - enabling observer');
+//         currentFeatureActiveIndex = featureTotalTitles - 1;
+//         goToNewElement(currentFeatureActiveIndex);
+//         lockScroll();
+//     },
+
+// });
+
+// gsap.set(featureDescriptions, { opacity: 0, y: 20 });
+// gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
+// featuresTitles[0].classList.add("active");
+// featureDescriptions[0].classList.add("active");
+
+// if (featureImages && featureImages.length) {
+//     gsap.set(featureImages, { opacity: 0, y: 20 });
+//     gsap.set(featureImages[0], { opacity: 1, y: 0 });
+//     featureImages[0].classList.add("active");
+// }
+
+// intendObserver.disable();
 
 // Video play/pause on scroll
 
