@@ -207,131 +207,34 @@ gsap.set(descriptions[0], { opacity: 1, y: 0 });
 
 // Features section
 
-const featuresTitles = gsap.utils.toArray(".features-title-item");
-const featureDescriptions = gsap.utils.toArray(".features-descs-item");
-const featureImages = gsap.utils.toArray(".features-images__item");
-const featureTotalTitles = featuresTitles.length;
-
-const featTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: ".section-space",
-        start: "center center",
-        end: "+=1000",
-        pin: true,
-        scrub: true,
-        pinSpacing: true,
-        // markers: true,
-        onUpdate: (self) => {
-            const progress = self.progress;
-            const currentIndex = Math.floor(progress * featureTotalTitles);
-            const clampedIndex = Math.min(currentIndex, featureTotalTitles - 1);
-
-            upadateFeatureActiveElements(clampedIndex);
-        }
-    }
-});
-
-let currentFeatureActiveIndex = 0;
-
-const upadateFeatureActiveElements = (index) => {
-    if (index === currentFeatureActiveIndex) return;
-
-    featuresTitles.forEach((title, i) => {
-        if (i === index) {
-            title.classList.add("active");
-            gsap.to(title, {
-                scale: 1.1,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        } else {
-            title.classList.remove("active");
-            gsap.to(title, {
-                scale: 1,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        }
-    });
-
-
-    if (currentFeatureActiveIndex !== index && currentFeatureActiveIndex >= 0) {
-        const currentDesc = featureDescriptions[currentFeatureActiveIndex];
-        gsap.to(currentDesc, {
-            opacity: 0,
-            y: -20,
-            duration: 0.3,
-            ease: "power2.out",
-            onComplete: () => {
-                currentDesc.classList.remove("active");
-                currentDesc.style.poiunterEvents = "none";
-            }
-        });
-
-        const currentImage = featureImages[currentFeatureActiveIndex];
-        gsap.to(currentImage, {
-            opacity: 0,
-            y: -20,
-            duration: 0.3,
-            ease: "power2.out",
-            onComplete: () => {
-                currentImage.classList.remove("active");
-                currentImage.style.pointerEvents = "none";
-            }
-        });
-    }
-
-    const newDesc = featureDescriptions[index];
-    newDesc.style.pointerEvents = "auto";
-    gsap.to(newDesc, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onStart: () => {
-            newDesc.classList.add("active");
-        }
-    });
-
-    const newImage = featureImages[index];
-    newImage.style.pointerEvents = "auto";
-    gsap.to(newImage, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onStart: () => {
-            newImage.classList.add("active");
-        }
-    });
-
-    currentFeatureActiveIndex = index;
-
-};
-
-gsap.set(featureDescriptions, { opacity: 0, y: 20 });
-gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
-
-
-
-// Observer version
-
-// const featureSection = document.querySelector(".page-section.feature");
 // const featuresTitles = gsap.utils.toArray(".features-title-item");
 // const featureDescriptions = gsap.utils.toArray(".features-descs-item");
 // const featureImages = gsap.utils.toArray(".features-images__item");
 // const featureTotalTitles = featuresTitles.length;
 
+// const featTl = gsap.timeline({
+//     scrollTrigger: {
+//         trigger: ".section-space",
+//         start: "center center",
+//         end: "+=1000",
+//         pin: true,
+//         scrub: true,
+//         pinSpacing: true,
+//         // markers: true,
+//         onUpdate: (self) => {
+//             const progress = self.progress;
+//             const currentIndex = Math.floor(progress * featureTotalTitles);
+//             const clampedIndex = Math.min(currentIndex, featureTotalTitles - 1);
+
+//             upadateFeatureActiveElements(clampedIndex);
+//         }
+//     }
+// });
+
 // let currentFeatureActiveIndex = 0;
-// let isAnimating = false;
-// let scrollLocked = false;
 
-// const goToNewElement = (index) => {
+// const upadateFeatureActiveElements = (index) => {
 //     if (index === currentFeatureActiveIndex) return;
-
-//     isAnimating = true;
-
-//     const oldIndex = currentFeatureActiveIndex;
 
 //     featuresTitles.forEach((title, i) => {
 //         if (i === index) {
@@ -351,8 +254,9 @@ gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 //         }
 //     });
 
-//     if (oldIndex >= 0 && oldIndex < featureDescriptions.length) {
-//         const currentDesc = featureDescriptions[oldIndex];
+
+//     if (currentFeatureActiveIndex !== index && currentFeatureActiveIndex >= 0) {
+//         const currentDesc = featureDescriptions[currentFeatureActiveIndex];
 //         gsap.to(currentDesc, {
 //             opacity: 0,
 //             y: -20,
@@ -364,23 +268,20 @@ gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 //             }
 //         });
 
-//         if (featureImages && featureImages.length && featureImages[oldIndex]) {
-//             const currentImage = featureImages[oldIndex];
-//             gsap.to(currentImage, {
-//                 opacity: 0,
-//                 y: -20,
-//                 duration: 0.3,
-//                 ease: "power2.out",
-//                 onComplete: () => {
-//                     currentImage.classList.remove("active");
-//                     currentImage.style.pointerEvents = "none";
-//                 }
-//             });
-//         }
-//     };
+//         const currentImage = featureImages[currentFeatureActiveIndex];
+//         gsap.to(currentImage, {
+//             opacity: 0,
+//             y: -20,
+//             duration: 0.3,
+//             ease: "power2.out",
+//             onComplete: () => {
+//                 currentImage.classList.remove("active");
+//                 currentImage.style.pointerEvents = "none";
+//             }
+//         });
+//     }
 
 //     const newDesc = featureDescriptions[index];
-//     console.log(newDesc);
 //     newDesc.style.pointerEvents = "auto";
 //     gsap.to(newDesc, {
 //         opacity: 1,
@@ -392,102 +293,248 @@ gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 //         }
 //     });
 
-//     if (featureImages && featureImages.length && featureImages[index]) {
-//         const newImage = featureImages[index];
-//         newImage.style.pointerEvents = "auto";
-//         gsap.to(newImage, {
-//             opacity: 1,
-//             y: 0,
-//             duration: 0.5,
-//             ease: "power2.out",
-//             onStart: () => {
-//                 newImage.classList.add("active");
-//             }
-//         });
-//     }
+//     const newImage = featureImages[index];
+//     newImage.style.pointerEvents = "auto";
+//     gsap.to(newImage, {
+//         opacity: 1,
+//         y: 0,
+//         duration: 0.5,
+//         ease: "power2.out",
+//         onStart: () => {
+//             newImage.classList.add("active");
+//         }
+//     });
 
 //     currentFeatureActiveIndex = index;
-// }
 
-// const hanldeScroll = (direction) => {
-//     if (isAnimating) return;
+// };
 
-//     if (direction === 1) {
-//         console.log('➡️ scroll down');
-//         if (currentActiveIndex < featureTotalTitles - 1) {
-//             goToNewElement(currentFeatureActiveIndex + 1);
-//         } else {
-//             unlockScroll();
-//         }
-//     }
-
-//     if (direction === -1) {
-//         console.log('⬅️ scroll up');
-//         if (currentActiveIndex > 0) {
-//             goToNewElement(currentFeatureActiveIndex - 1);
-//         } else {
-//             unlockScroll();
-//         }
-//     }
-// }
+// gsap.set(featureDescriptions, { opacity: 0, y: 20 });
+// gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 
 
 
-// const intendObserver = Observer.create({
-//     target: window,
-//     type: "wheel,touch,scroll",
-//     preventDefault: true,
-//     enabled: false,
-//     tolerance: 10,
-//     onUp: () => hanldeScroll(-1),
-//     onDown: () => hanldeScroll(1),
-// });
-// console.log(intendObserver);
+// Observer version
+
+const featureSection = document.querySelector(".page-section.feature");
+const featuresTitles = gsap.utils.toArray(".features-title-item");
+const featureDescriptions = gsap.utils.toArray(".features-descs-item");
+const featureImages = gsap.utils.toArray(".features-images__item");
+const featureTotalTitles = featuresTitles.length;
+
+let currentFeatureActiveIndex = 0;
+let isAnimating = false;
+// let scrollLocked = false;
+let allowScroll = false;
+
+let scrollTimeout = gsap.delayedCall(0.5, () => {
+    allowScroll = true;
+}).pause();
+
+const goToNewElement = (index) => {
+    if (index === currentFeatureActiveIndex) return;
+
+    isAnimating = true;
+
+    const oldIndex = currentFeatureActiveIndex;
+
+    featuresTitles.forEach((title, i) => {
+        if (i === index) {
+            title.classList.add("active");
+            gsap.to(title, {
+                scale: 1.1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        } else {
+            title.classList.remove("active");
+            gsap.to(title, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+    });
+
+    if (oldIndex >= 0 && oldIndex < featureDescriptions.length) {
+        const currentDesc = featureDescriptions[oldIndex];
+        gsap.to(currentDesc, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            ease: "power2.out",
+            onComplete: () => {
+                currentDesc.classList.remove("active");
+                currentDesc.style.pointerEvents = "none";
+            }
+        });
+
+        if (featureImages && featureImages.length && featureImages[oldIndex]) {
+            const currentImage = featureImages[oldIndex];
+            gsap.to(currentImage, {
+                opacity: 0,
+                y: -20,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    currentImage.classList.remove("active");
+                    currentImage.style.pointerEvents = "none";
+                }
+            });
+        }
+    };
+
+    const newDesc = featureDescriptions[index];
+    console.log(newDesc);
+    newDesc.style.pointerEvents = "auto";
+    gsap.to(newDesc, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onStart: () => {
+            newDesc.classList.add("active");
+        },
+        onComplete: () => {
+            isAnimating = false;
+            currentFeatureActiveIndex = index;
+        }
+    });
+
+    if (featureImages && featureImages.length && featureImages[index]) {
+        const newImage = featureImages[index];
+        newImage.style.pointerEvents = "auto";
+        gsap.to(newImage, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            onStart: () => {
+                newImage.classList.add("active");
+            }
+        });
+    }
+
+    // currentFeatureActiveIndex = index;
+}
+
+const hanldeScroll = (direction) => {
+    if (isAnimating || !allowScroll) return;
+
+    allowScroll = false;
+    scrollTimeout.restart(true);
+
+    if (direction === 1) {
+        console.log('➡️ scroll down');
+        if (currentFeatureActiveIndex < featureTotalTitles - 1) {
+            goToNewElement(currentFeatureActiveIndex + 1);
+        } else {
+            // unlockScroll();
+            preventScroll.disable();
+            intentObserver.disable();
+        }
+    }
+
+    if (direction === -1) {
+        console.log('⬅️ scroll up');
+        if (currentFeatureActiveIndex > 0) {
+            goToNewElement(currentFeatureActiveIndex - 1);
+        } else {
+            // unlockScroll();
+            preventScroll.disable();
+            intentObserver.disable();
+        }
+    }
+}
+
+const preventScroll = ScrollTrigger.observe({
+    preventDefault: true,
+    type: "wheel,touch,pointer,scroll",
+    allowClicks: true,
+
+    onEnable(self) {
+        self.savedScroll = self.scrollY();
+    },
+
+    onChangeY(self) {
+        self.scrollY(self.savedScroll);
+    }
+});
+preventScroll.disable();
+
+
+const intentObserver = ScrollTrigger.observe({
+    target: window,
+    type: "wheel,touch,pointer",
+    preventDefault: true,
+    // enabled: false,
+    tolerance: 10,
+    // onEnable(self) {
+    //     let savedScroll = self.scrollY();
+    //     self._restoreScroll = () => self.scrollY(savedScroll);
+    //     document.addEventListener("scroll", self._restoreScroll, {passice: false});
+    // },
+
+    // onDisable(self) {
+    //     document.removeEventListener("scroll", self._restoreScroll);
+    // },
+    onUp: () => hanldeScroll(-1),
+    onDown: () => hanldeScroll(1),
+});
+intentObserver.disable();
+// console.log(intentObserver);
 
 // const lockScroll = () => {
 //     if (scrollLocked) return;
 
 //     scrollLocked = true;
-//     intendObserver.enable();
+//     intentObserver.enable();
 // }
 
 // const unlockScroll = () => {
 //     if (!scrollLocked) return;
 //     scrollLocked = false;
-//     intendObserver.disable();
+//     intentObserver.disable();
 // }
 
-// ScrollTrigger.create({
-//     trigger: featureSection,
-//     start: "center center",
-//     end: "+=1",
-//     markers: true,
+ScrollTrigger.create({
+    trigger: featureSection,
+    start: "center center",
+    end: "+=1",
+    markers: true,
 
-//     onEnter: () => {
-//         lockScroll();
-//     },
+    onEnter: (self) => {
+        // lockScroll();
+        self.scroll(self.start + 1);
+        allowScroll = true;
+        preventScroll.enable();
+        intentObserver.enable();
+    },
 
-//     onEnterBack: () => {
-//         console.log('◀️ onEnterBack - enabling observer');
-//         currentFeatureActiveIndex = featureTotalTitles - 1;
-//         goToNewElement(currentFeatureActiveIndex);
-//         lockScroll();
-//     },
+    onEnterBack: (self) => {
+        console.log('◀️ onEnterBack - enabling observer');
+        self.scroll(self.end - 1);
+        currentFeatureActiveIndex = featureTotalTitles - 1;
+        goToNewElement(currentFeatureActiveIndex);
+        // lockScroll();
+        preventScroll.enable();
+        intentObserver.enable();
+    },
 
-// });
+});
 
-// gsap.set(featureDescriptions, { opacity: 0, y: 20 });
-// gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
-// featuresTitles[0].classList.add("active");
-// featureDescriptions[0].classList.add("active");
+gsap.set(featureDescriptions, { opacity: 0, y: 20 });
+gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
+featuresTitles[0].classList.add("active");
+featureDescriptions[0].classList.add("active");
 
-// if (featureImages && featureImages.length) {
-//     gsap.set(featureImages, { opacity: 0, y: 20 });
-//     gsap.set(featureImages[0], { opacity: 1, y: 0 });
-//     featureImages[0].classList.add("active");
-// }
+if (featureImages && featureImages.length) {
+    gsap.set(featureImages, { opacity: 0, y: 20 });
+    gsap.set(featureImages[0], { opacity: 1, y: 0 });
+    featureImages[0].classList.add("active");
+}
 
-// intendObserver.disable();
+// intentObserver.disable();
 
 // Video play/pause on scroll
 
