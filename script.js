@@ -447,6 +447,8 @@ const hanldeScroll = (direction) => {
     }
 }
 
+let wheelBlocker = null;
+
 const preventScroll = ScrollTrigger.observe({
     preventDefault: true,
     type: "wheel,touch,pointer,scroll",
@@ -454,6 +456,26 @@ const preventScroll = ScrollTrigger.observe({
 
     onEnable(self) {
         self.savedScroll = self.scrollY();
+
+        // wheelBlocker = (e) => {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // }
+        // window.addEventListener("scroll", wheelBlocker, { passive: false, capture: true });
+
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+        document.body.style.overflow = 'hidden';
+    },
+
+    onDisable(self) {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      
+        // if(wheelBlocker){
+        //     window.removeEventListener("scroll", wheelBlocker, { capture: true });
+        //     wheelBlocker = null;
+        // }
     },
 
     onChangeY(self) {

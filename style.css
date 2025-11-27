@@ -403,7 +403,7 @@ body {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: stretch;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     right: 0;
