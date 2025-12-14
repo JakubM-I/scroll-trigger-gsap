@@ -247,6 +247,10 @@ body {
     transition: opacity 0.3s ease;
 }
 
+.features-title-item{
+    cursor: pointer;
+}
+
 .title-list-item.active,
 .features-title-item.active  {
     opacity: 1;

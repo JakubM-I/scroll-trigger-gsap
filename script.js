@@ -1,4 +1,4 @@
-gsap.registerPlugin(ScrollTrigger, Observer);
+gsap.registerPlugin(ScrollTrigger, Observer, ScrollToPlugin);
 // gsap.from(".container-body", {
 //     x: "-1000px",
 //     opacity: 0,
@@ -211,6 +211,7 @@ const featuresTitles = gsap.utils.toArray(".features-title-item");
 const featureDescriptions = gsap.utils.toArray(".features-descs-item");
 const featureImages = gsap.utils.toArray(".features-images__item");
 const featureTotalTitles = featuresTitles.length;
+let isNavigating = false;
 
 const featTl = gsap.timeline({
     scrollTrigger: {
@@ -222,6 +223,7 @@ const featTl = gsap.timeline({
         pinSpacing: true,
         markers: true,
         onUpdate: (self) => {
+            if(isNavigating) return;
             const progress = self.progress;
             const currentIndex = Math.floor(progress * featureTotalTitles);
             const clampedIndex = Math.min(currentIndex, featureTotalTitles - 1);
@@ -234,6 +236,7 @@ const featTl = gsap.timeline({
 let currentFeatureActiveIndex = 0;
 
 const upadateFeatureActiveElements = (index) => {
+    console.log("Updating to index:", index);
     if (index === currentFeatureActiveIndex) return;
 
     featuresTitles.forEach((title, i) => {
@@ -313,6 +316,45 @@ gsap.set(featureDescriptions, { opacity: 0, y: 20 });
 gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 
 
+
+const handleTitleClick = (index) => {
+    console.log("isNavigating:", isNavigating);
+    console.log("Clicked index:", index);
+    console.log("Active index:", currentFeatureActiveIndex);
+    if (index === currentFeatureActiveIndex) return;
+
+    const st = featTl.scrollTrigger;
+    isNavigating = true;
+
+    console.log("isNavigating:", isNavigating);
+    
+    upadateFeatureActiveElements(index);
+
+    const scrollStart = st.start;
+    const scrollEnd = st.end;
+
+    const targetProgress = (index + 0.01) / featureTotalTitles;
+    const targetScroll = scrollStart + targetProgress * (scrollEnd - scrollStart);
+
+    st.scroll(targetScroll);
+
+    setTimeout(() => {
+        isNavigating = false;
+    }, 100);
+
+    // gsap.to(window, {
+    //     scrollTo: targetScroll,
+    //     duration: 0.6,
+    //     ease: "power2.inOut"
+    // });
+};
+
+featuresTitles.forEach((title, index) => {
+    title.addEventListener("click", () => {
+        console.log("Clicked title index:", index);
+        handleTitleClick(index);
+    });
+});
 
 // Observer version
 
@@ -471,7 +513,7 @@ gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 //     onDisable(self) {
 //         document.body.style.overflow = '';
 //         document.body.style.paddingRight = '';
-      
+
 //         // if(wheelBlocker){
 //         //     window.removeEventListener("scroll", wheelBlocker, { capture: true });
 //         //     wheelBlocker = null;
