@@ -318,15 +318,10 @@ gsap.set(featureDescriptions[0], { opacity: 1, y: 0 });
 
 
 const handleTitleClick = (index) => {
-    console.log("isNavigating:", isNavigating);
-    console.log("Clicked index:", index);
-    console.log("Active index:", currentFeatureActiveIndex);
     if (index === currentFeatureActiveIndex) return;
 
     const st = featTl.scrollTrigger;
     isNavigating = true;
-
-    console.log("isNavigating:", isNavigating);
     
     upadateFeatureActiveElements(index);
 
@@ -341,12 +336,6 @@ const handleTitleClick = (index) => {
     setTimeout(() => {
         isNavigating = false;
     }, 100);
-
-    // gsap.to(window, {
-    //     scrollTo: targetScroll,
-    //     duration: 0.6,
-    //     ease: "power2.inOut"
-    // });
 };
 
 featuresTitles.forEach((title, index) => {
